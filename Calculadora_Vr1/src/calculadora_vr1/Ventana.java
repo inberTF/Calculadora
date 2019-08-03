@@ -17,13 +17,12 @@ public class Ventana extends javax.swing.JFrame {
      * Creates new form Ventana
      */
     private WriteFormula writeFormula;
-    
+
     public Ventana() {
         initComponents();
-        writeFormula = new WriteFormula(this.jTextArea1);
-        
+        writeFormula = new WriteFormula(this.tArea);
+
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -35,7 +34,7 @@ public class Ventana extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        tArea = new javax.swing.JTextArea();
         jPanel1 = new javax.swing.JPanel();
         b7 = new javax.swing.JButton();
         b8 = new javax.swing.JButton();
@@ -48,10 +47,10 @@ public class Ventana extends javax.swing.JFrame {
         b3 = new javax.swing.JButton();
         par = new javax.swing.JButton();
         b0 = new javax.swing.JButton();
-        punto = new javax.swing.JButton();
+        bP = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         bSuma = new javax.swing.JButton();
-        jButton13 = new javax.swing.JButton();
+        bEqual = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         bResta = new javax.swing.JButton();
         bDiv = new javax.swing.JButton();
@@ -65,12 +64,17 @@ public class Ventana extends javax.swing.JFrame {
         jButton24 = new javax.swing.JButton();
         jButton25 = new javax.swing.JButton();
         jButton26 = new javax.swing.JButton();
+        bdel = new javax.swing.JButton();
+        bClear = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        tArea.setColumns(20);
+        tArea.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        tArea.setRows(5);
+        tArea.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        tArea.setEnabled(false);
+        jScrollPane1.setViewportView(tArea);
 
         jPanel1.setLayout(new java.awt.GridLayout(4, 3, 10, 10));
 
@@ -150,10 +154,20 @@ public class Ventana extends javax.swing.JFrame {
         jPanel1.add(par);
 
         b0.setText("0");
+        b0.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b0ActionPerformed(evt);
+            }
+        });
         jPanel1.add(b0);
 
-        punto.setText(".");
-        jPanel1.add(punto);
+        bP.setText(".");
+        bP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bPActionPerformed(evt);
+            }
+        });
+        jPanel1.add(bP);
 
         jPanel2.setLayout(new java.awt.GridLayout(2, 0, 10, 10));
 
@@ -165,13 +179,13 @@ public class Ventana extends javax.swing.JFrame {
         });
         jPanel2.add(bSuma);
 
-        jButton13.setText("=");
-        jButton13.addActionListener(new java.awt.event.ActionListener() {
+        bEqual.setText("=");
+        bEqual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton13ActionPerformed(evt);
+                bEqualActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton13);
+        jPanel2.add(bEqual);
 
         jPanel3.setLayout(new java.awt.GridLayout(4, 3, 10, 10));
 
@@ -226,20 +240,42 @@ public class Ventana extends javax.swing.JFrame {
         jButton26.setText("/");
         jPanel3.add(jButton26);
 
+        bdel.setText("<--");
+        bdel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bdelActionPerformed(evt);
+            }
+        });
+
+        bClear.setForeground(new java.awt.Color(255, 51, 51));
+        bClear.setText("Clear");
+        bClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bClearActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(312, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(bClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(114, 114, 114)
+                                .addComponent(bdel, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(31, 31, 31))
         );
         layout.setVerticalGroup(
@@ -247,30 +283,36 @@ public class Ventana extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bdel)
+                    .addComponent(bClear))
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+    private void bEqualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEqualActionPerformed
         writeFormula.writeFormula(" = ");
         ArrayList nums = writeFormula.devNumeros();
         writeFormula.resolveFormula(nums);
-        
-    }//GEN-LAST:event_jButton13ActionPerformed
+        bP.setEnabled(true);
+    }//GEN-LAST:event_bEqualActionPerformed
 
     private void bSumaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSumaActionPerformed
         writeFormula.writeFormula(" + ");
+        bP.setEnabled(true);
     }//GEN-LAST:event_bSumaActionPerformed
 
     private void bMultiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMultiActionPerformed
         writeFormula.writeFormula(" * ");
+        bP.setEnabled(true);
     }//GEN-LAST:event_bMultiActionPerformed
 
     private void b1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b1ActionPerformed
@@ -290,11 +332,11 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_b4ActionPerformed
 
     private void b9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b9ActionPerformed
-       writeFormula.writeFormula("9");
+        writeFormula.writeFormula("9");
     }//GEN-LAST:event_b9ActionPerformed
 
     private void b8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b8ActionPerformed
-       writeFormula.writeFormula("8");
+        writeFormula.writeFormula("8");
     }//GEN-LAST:event_b8ActionPerformed
 
     private void b7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b7ActionPerformed
@@ -311,11 +353,32 @@ public class Ventana extends javax.swing.JFrame {
 
     private void bRestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRestaActionPerformed
         writeFormula.writeFormula(" - ");
+        bP.setEnabled(true);
     }//GEN-LAST:event_bRestaActionPerformed
 
     private void bDivActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDivActionPerformed
         writeFormula.writeFormula(" / ");
+        bP.setEnabled(true);
     }//GEN-LAST:event_bDivActionPerformed
+
+    private void b0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b0ActionPerformed
+        writeFormula.writeFormula("0");
+    }//GEN-LAST:event_b0ActionPerformed
+
+    private void bdelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bdelActionPerformed
+        writeFormula.re();
+    }//GEN-LAST:event_bdelActionPerformed
+
+    private void bClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bClearActionPerformed
+        writeFormula.cleanTArea();
+    }//GEN-LAST:event_bClearActionPerformed
+
+    private void bPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bPActionPerformed
+        if (!tArea.getText().equals("")) {
+            writeFormula.writeFormula(".");
+            bP.setEnabled(false);
+        }
+    }//GEN-LAST:event_bPActionPerformed
 
     /**
      * @param args the command line arguments
@@ -363,12 +426,15 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JButton b7;
     private javax.swing.JButton b8;
     private javax.swing.JButton b9;
+    private javax.swing.JButton bClear;
     private javax.swing.JButton bDiv;
+    private javax.swing.JButton bEqual;
     private javax.swing.JButton bMulti;
+    private javax.swing.JButton bP;
     private javax.swing.JButton bPor;
     private javax.swing.JButton bResta;
     private javax.swing.JButton bSuma;
-    private javax.swing.JButton jButton13;
+    private javax.swing.JButton bdel;
     private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton21;
@@ -381,8 +447,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton par;
-    private javax.swing.JButton punto;
+    private javax.swing.JTextArea tArea;
     // End of variables declaration//GEN-END:variables
 }

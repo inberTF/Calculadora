@@ -45,5 +45,20 @@ public class Calc {
         result = Num1 + Num2;
         return result;
     }
+    public float res(){
+        float result = 0; 
+        result = Num1 - Num2;
+        return result;
+    }
+    public float multi(){
+        float result = 0; 
+        result = Num1 * Num2;
+        return result;
+    }
+    public float div(){
+        float result = 0; 
+        result = Num1 / Num2;
+        return result;
+    }
     
 }
